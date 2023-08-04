@@ -17,8 +17,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Solution](#)
-- Live Site URL: [Live Site](#)
+- [Solution](https://www.frontendmentor.io/solutions/results-summary-component-dynamically-populating-html-iJem2MhzOY)
+- [Live Site](https://results-summary-component-nuriatr.netlify.app/)
 
 ### Built with
 
