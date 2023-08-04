@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Frontend Mentor | Results Summary Component</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="result">
+            <h1>Your Result</h1>
+            
+            <div class="score">
+                <p class="score-main">0</p>
+                <p>of 100</p>                
+            </div>
+
+            <h2>Great</h2>
+            <div class="comment">
+                <p>You scored higher than 65% of the people who have taken these tests.</p>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <h1>Summary</h1>
+
+            <div class="container" id="summary-container">
+                <!-- <section class="section reaction-bg">
+                    <img src="/assets/images/icon-reaction.svg" alt="">
+                    <p class="section-label reaction-text">Reaction</p>
+
+                    <div class="summary-score">
+                        <p class="section-point">80</p>
+                        <p class="section-total">&nbsp;/ 100</p>                        
+                    </div>
+                </section>
+
+                <section class="section memory-bg">
+                    <img src="/assets/images/icon-memory.svg" alt="">
+                    <p class="section-label memory-text">Memory</p>
+
+                    <div class="summary-score">
+                        <p class="section-point">92</p>
+                        <p class="section-total">&nbsp;/ 100</p>                        
+                    </div>
+                </section>
+
+                <section class="section verabl-bg">
+                    <img src="/assets/images/icon-verbal.svg" alt="">
+                    <p class="section-label verabl-text">Verbal</p>
+
+                    <div class="summary-score">
+                        <p class="section-point">61</p>
+                        <p class="section-total">&nbsp;/ 100</p>                        
+                    </div>
+                </section>
+
+                <section class="section visual-bg">
+                    <img src="/assets/images/icon-visual.svg" alt="">
+                    <p class="section-label visual-text">Visual</p>
+
+                    <div class="summary-score">
+                        <p class="section-point">72</p>
+                        <p class="section-total">&nbsp;/ 100</p>                        
+                    </div>
+                </section> -->            
+            </div>
+            <button href="#">Continue</button>    
+        </div>
+    </div>
+
+    <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+        Coded by <a href="#">Nuria Torres</a>.
+    </div>
+
+    <!-- Dynamically populate summary content with data.json -->
+    <script>
+        // Fetch data from the JSON file
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const summaryContainer = document.getElementById('summary-container');
+                let totalScore = 0;
+                
+                // Loop through the data and create sections
+                data.forEach(item => {
+                    const section = document.createElement('section');
+                    section.classList.add('section', `${item.category.toLowerCase()}-bg`);
+                    
+                    const icon = document.createElement('img');
+                    icon.src = item.icon;
+                    
+                    const label = document.createElement('p');
+                    label.classList.add('section-label', `${item.category.toLowerCase()}-text`);
+                    label.textContent = item.category;
+                    
+                    const summaryScore = document.createElement('div');
+                    summaryScore.classList.add('summary-score');
+                    
+                    const point = document.createElement('p');
+                    point.classList.add('section-point');
+                    point.textContent = item.score;
+                    
+                    const total = document.createElement('p');
+                    total.classList.add('section-total');
+                    total.innerHTML = '&nbsp;/ 100';
+                    
+                    summaryScore.appendChild(point);
+                    summaryScore.appendChild(total);
+                    
+                    section.appendChild(icon);
+                    section.appendChild(label);
+                    section.appendChild(summaryScore);
+                    
+                    summaryContainer.appendChild(section);
+                    totalScore += item.score; 
+                });
+
+                // Calculate and display average score in result
+                const avgScore = totalScore / data.length;
+                const scoreElement = document.querySelector('.score-main');
+                scoreElement.textContent = Math.round(avgScore);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
